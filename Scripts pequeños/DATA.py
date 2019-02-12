@@ -104,15 +104,16 @@ def obtenerCliente(titulo):
 def obtenerCategoria(titulo, descripcion, object):
 	return 15
 
-
-open with ('dd-mm-aaaa.csv', 'w') as csv:
-	csv.writerow(encabezado)
-	open with ('prueba.csv', 'r') as data:
-		contador = 0
-		for row in data:
-			if (contador != 0):
-				for i in range(0, 44) :
-					dataRow.append(i)
-					contador+=1 
-			else:
-				contador +=1
+# función principal del script: lee el archivo, escribe el archivo, llama al resto de funciones.
+def main():
+    open with ('dd-mm-aaaa.csv', 'w') as csv:
+    	csv.writerow(encabezado)
+    	open with ('prueba.csv', 'r') as data:
+    		contador = 0
+    		for row in data:
+    			if (contador != 0):
+    				for i in range(0, 44) :
+    					dataRow.append(i)
+    					contador+=1 
+    			else:
+    				contador +=1
