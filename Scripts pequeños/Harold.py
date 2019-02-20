@@ -4,14 +4,24 @@ import csv
 cont = 0
 
 def obtenerDuracion(fechaHoraI, fechaHoraF):
-	try:
-		fechaIDate = datetime.strptime(fechaHoraI, '%d/%m/%Y %H:%M')
-		fechaFDate = datetime.strptime(fechaHoraF, '%d/%m/%Y %H:%M')
-		diff = fechaIDate - fechaFDate
-		result = str(diff.days)
-		return result
-	except:
-		return 'No ha sido resuelto'
+	fechaIDate = datetime.strptime(formatDate(fechaHoraI), '%d/%m/%Y %H:%M:%S')
+	fechaFDate = datetime.strptime(formatDate(fechaHoraF), '%d/%m/%Y %H:%M:%S')
+	diff = fechaFDate - fechaIDate
+	return diff.days
+
+def formatDate(paramFecha):
+	fecha = ''
+	splitF = paramFecha.split(' ')
+	fecha = splitF[0] + ' ' + splitF[1]
+	# contador = 0
+	# for coso in splitF:
+	# 	print (str(contador) + ' ' + coso)
+	# 	contador = contador + 1
+	# if(splitF[3] == 'a.'):
+	# 	fecha = fecha + ' ' + 'AM'
+	# elif (splitF[3] == 'p.'):
+	# 	fecha = fecha + ' ' + 'PM'
+	return fecha
 
 def esPremium(cliente):
 	result = ' '
@@ -26,7 +36,7 @@ def esPremium(cliente):
 
 
 with open ('export.csv', 'r', errors='ignore') as dataContainer:
-	with open ('exportsemicolon.csv', 'w') as dataProceser:
+	with open ('reporte.csv', 'w') as dataProceser:
 		reader = csv.reader(dataContainer, delimiter=';')
 		writer = csv.writer(dataProceser, delimiter= ';')
 		cont = 0
@@ -53,7 +63,8 @@ with open ('export.csv', 'r', errors='ignore') as dataContainer:
 			ciOperativo = row[17]
 			Asignado = row[18]
 			fechaHoraRes = row[19]
-			tiempoEvento = obtenerDuracion(fechaHoraApert, fechaHoraRes)
+			if (cont != 0):
+				tiempoEvento = obtenerDuracion(fechaHoraApert, fechahoraAct)
 			idInteraccion = row[20]
 			incidente = row[21]
 			solucion = row[22]
