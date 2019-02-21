@@ -65,18 +65,22 @@ def obtenerNet(severity, nodeHint, title, descripcion):
 	titleLower = title.lower()
 	descripcionLow = descripcion.lower()
 	nodeHintLow = nodeHint.lower()
+	print (nodeHintLow)
 	if (severity.lower() == CRITICAL):
 		with open('maquinasNetbios.csv' , 'r') as maquina:
 			for line in maquina:
-				if(nodeHintLow.find(line[0].lower()) != -1):
+				if(nodeHintLow.find(line.lower()) != -1):
 					if(descripcionLow.find(NORESPONSE) != -1):
 						found = True
+						break
 					else:
 						for tit in titulos:
 							if(titleLower.find(tit.lower()) != -1):
 								found = True
 								break
-	if (found):
+						if (found == True):
+							break
+	if (found == True):
 		return 'SI'
 	else:
 		return ' '
@@ -136,7 +140,6 @@ def obtenerCounter(severity, titulo):
 	titLow = titulo.lower()
 	if(severity.lower() == CRITICAL):
 		if (titLow.find('counters in error') != -1):
-			print('entre')
 			found = 'SI'
 	return found
 
